@@ -14,21 +14,47 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+-(void)viewDidLoad {
+    questions = [[NSMutableArray alloc] init];
+    answers = [[NSMutableArray alloc] init];
+    currentQuestionIndex =0;
+    
+    //add questions and answers to arrays
+    [questions addObject:@"What is 7 + 7?"];
+    [answers addObject:@"14"];
+    
+    [questions addObject:@"What is the capital of Vermot?"];
+    [answers addObject:@"Montpelier"];
+    
+    [questions addObject:@"From what is cognac made?"];
+    [answers addObject:@"Grapes"];
+
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+- (IBAction)showQuestion:(id)sender {
+    NSLog(@"In showQuestion");
+    
+    currentQuestionIndex++;
+    
+    if(currentQuestionIndex == [questions count])
+    {
+        currentQuestionIndex = 0;
+    }
+    
+    NSString *question = [questions objectAtIndex:currentQuestionIndex];
+    [self.questionLabel setText:question];
+    NSLog(@"displaying question: %@", question);
+        
+    
+
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+- (IBAction)showAnswer:(id)sender {
+    NSLog(@"In showAnswer");
+        
+    
+    [self.answerLabel setText:[answers objectAtIndex:currentQuestionIndex]];
 }
+
 
 @end
